@@ -30,25 +30,30 @@
         <div class="navbar-end">
              <a class="navbar-item">Postar Serviços</a>
              <a class="navbar-item">Pesquisar Serviços</a>
-        <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-warning"><strong>Cadastrar-se</strong></a>
-              <a class="button is-success">Entrar</a>
-            </div>
-        </div>
 
-        <div class="navbar-item has-dropdown is-hoverable">
-           <a  class="navbar-item">Teofilo Chichume </a>
+        <% if (!user_signed_in?) %>
 
-                <div class="navbar-dropdown ">
-                    <a href="" class="navbar-item ">Perfil</a>
-                    <a href="" class="navbar-item ">Painel Principal</a>
-                    <hr class="navbar-divider ">
-                    <a href="" class="navbar-item ">Sair</a>
-            
+                <div class="navbar-item">
+                    <div class="buttons">
+                    <%= link_to "Cadastra-se", new_user_registration_path, Class: "button is-success" %> 
+                    <%= link_to "Entrar", new_user_session_path, Class: "button is-light" %> 
+                    </div>
                 </div>
-        </div>
 
+        <% else %>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                <a  class="navbar-item"><%= current_user.email %></a>
+
+                        <div class="navbar-dropdown ">
+                            <%= link_to "Perfil", edit_user_registration_path, Class: "navbar-item" %> 
+                            <a href="" class="navbar-item ">Painel Principal</a>
+                            <hr class="navbar-divider ">
+                            <%= link_to "Sair", destroy_user_session_path,  method: :delete, Class: "navbar-item" %> 
+                    
+                        </div>
+                </div>
+        <% end %>
         </div>
       </div>
     </nav>
