@@ -235,7 +235,7 @@ Devise.setup do |config|
   # config.scoped_views = false
 
   # Configure the default scope given to Warden. By default it's the first
-  # devise role declared in your routes (usually :user).
+  # devise role declared in yourconfig.omniauth :facebook, "APP_ID", "APP_SECRET" routes (usually :user).
   # config.default_scope = :user
 
   # Set this configuration to false if you want /users/sign_out to sign out
@@ -296,4 +296,9 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+  config.omniauth :facebook, "204361419979334", "48f3de26bc793f5a923bb5d1f74f4a07",
+                      scope: 'email',
+                      info_fields: 'email,name',
+                      image_size: 'large'
+
 end
