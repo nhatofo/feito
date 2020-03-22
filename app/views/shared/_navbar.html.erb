@@ -31,19 +31,25 @@
              <a class="navbar-item">Postar Serviços</a>
              <a class="navbar-item">Pesquisar Serviços</a>
 
-        <% if (!user_signed_in?) %>
-
-                <div class="navbar-item">
-                    <div class="buttons">
-                    <%= link_to "Cadastra-se", new_user_registration_path, Class: "button is-success" %> 
-                    <%= link_to "Entrar", new_user_session_path, Class: "button is-light" %> 
-                    </div>
-                </div>
-
-        <% else %>
-
-                <div class="navbar-item has-dropdown is-hoverable">
-                <a  class="navbar-item"><%= current_user.full_name %></a>
+             <div class="navbar-end">
+             <%= link_to 'Postar Serviço', new_gig_path, class: "navbar-item" %>
+             <a class="navbar-item">Pesquizar Serviços</a>
+ 
+             <% if (!user_signed_in?) %>
+                 <div class="navbar-item">
+                     <div class="buttons">
+                         <%= link_to  "Cadastra-se", new_user_registration_path, class: "button is-primary" %>
+                         <%= link_to  "Entrar", new_user_session_path, class: "button is-light" %>
+                     </div>
+                 </div>
+             <% else %>
+                 <div class="navbar-item has-dropdown is-hoverable">
+                     <a class="navbar-link">
+                         <figure class="image is-24x24 m-r-5">
+                             <%= image_tag avatar_url(current_user), class: "is-rounded" %>
+                         </figure>
+                         <%= current_user.full_name %>
+                     </a>
 
                         <div class="navbar-dropdown ">
                             <%= link_to "Perfil", edit_user_registration_path, Class: "navbar-item" %> 
@@ -57,6 +63,49 @@
         </div>
       </div>
     </nav>
+
+      <nav class="navbar has-shadow" style="z-index: 5">
+          <div class="container">
+              <div class="navbar">
+                  <%= link_to 'Painel Controle', dashboard_path, class: "navbar-item" %>
+                  <div class="navbar-item has-dropdown is-hoverable">
+                      <a class="navbar-link">Vender Serviços</a>
+                      <div class="navbar-dropdown">
+                          <%= link_to 'Listar novo serviço', class: "navbar-item" %>
+                      </div>
+                  </div>
+                  <div class="navbar-item has-dropdown is-hoverable">
+                      <a class="navbar-link">Comprar Serviços</a>
+                      <div class="navbar-dropdown">
+                          <a class="navbar-item">Requisitar Serviços</a>
+                          <a class="navbar-item">Gerir Requisições</a>
+                      </div>
+                  </div>
+                  <div class="navbar-item has-dropdown is-hoverable">
+                      <a class="navbar-link">Requisições de Compra</a>
+                      <div class="navbar-dropdown">
+                          <a class="navbar-item">Requisições Activas</a>
+                          <a class="navbar-item">Ofertas Enviadas</a>
+                      </div>
+                  </div><div class="navbar-item has-dropdown is-hoverable">
+                      <a class="navbar-link">Gerir Pedidos</a>
+                      <div class="navbar-dropdown">
+                          <%= link_to  'Pedidos de Venda', class: "navbar-item" %><br>
+                          <%= link_to 'Pedidos de Compra', class: "navbar-item" %>
+                      </div>
+                  </div>
+                  <%= link_to 'Ganhos', dashboard_path, class: "navbar-item" %>
+                  <%= link_to 'Mensagens', dashboard_path, class: "navbar-item" %>
+                  <div class="navbar-item has-dropdown is-hoverable">
+                      <a class="navbar-link">Configurações</a>
+                      <div class="navbar-dropdown">
+                          <a class="navbar-item">Forma de Pagamento</a>
+                          <a class="navbar-item">Metodo  de Pagamento</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </nav>
 
     <script>
      $(document).ready(function() {
