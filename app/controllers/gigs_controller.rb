@@ -16,7 +16,7 @@ class GigsController < ApplicationController
 
     if @gig.save
       @gig.pricings.create(Pricing.pricing_types.values.map{ |x| {pricing_type: x} })
-      redirect_to edit_gig_path(@gig), notice: "Save..."
+      redirect_to edit_gig_path(@gig), notice: "Salvo..."
     else
       redirect_to request.referrer, flash: { error: @gig.errors.full_messages }
     end
@@ -34,18 +34,18 @@ class GigsController < ApplicationController
           next;
         else
           if pricing[:title].blank? || pricing[:description].blank? || pricing[:delivery_time].blank? || pricing[:price].blank?
-            return redirect_to request.referrer, flash: {error: "Invalid pricing"}
+            return redirect_to request.referrer, flash: {error: "Preçario Invalido"}
           end
         end
       end
     end
 
     if @step == 3 && gig_params[:description].blank?
-      return redirect_to request.referrer, flash: {error: "Description cannot be blank"}
+      return redirect_to request.referrer, flash: {error: "Descrição não pode estar em branco"}
     end
 
     if @step == 4 && @gig.photos.blank?
-      return redirect_to request.referrer, flash: {error: "You don't have any photos"}
+      return redirect_to request.referrer, flash: {error: "Não tens nenhuma foto carregada"}
     end
 
     if @step == 5
@@ -54,20 +54,20 @@ class GigsController < ApplicationController
           next;
         else
           if pricing[:title].blank? || pricing[:description].blank? || pricing[:delivery_time].blank? || pricing[:price].blank?
-            return redirect_to edit_gig_path(@gig, step: 2), flash: {error: "Invalid pricing"}
+            return redirect_to edit_gig_path(@gig, step: 2), flash: {error: "Preçario Invalido"}
           end
         end
       end
 
       if @gig.description.blank?
-        return redirect_to edit_gig_path(@gig, step: 3), flash: {error: "Description cannot be blank"}
+        return redirect_to edit_gig_path(@gig, step: 3), flash: {error: "Descrição não pode estar em branco"}
       elsif @gig.photos.blank?
-        return redirect_to edit_gig_path(@gig, step: 4), flash: {error: "You don't have any photos"}
+        return redirect_to edit_gig_path(@gig, step: 4), flash: {error: "Não tens nenhuma foto carregada"}
       end
     end
 
     if @gig.update(gig_params)
-      flash[:notice] = "Saved..."
+      flash[:notice] = "Salvo..."
     else
       return redirect_to request.referrer, flash: {error: @gig.errors.full_messages}
     end
@@ -108,7 +108,7 @@ class GigsController < ApplicationController
   end
 
   def is_authorised
-    redirect_to root_path, alert: "You do not have permission" unless current_user.id == @gig.user_id
+    redirect_to root_path, alert: "Não tem permissão" unless current_user.id == @gig.user_id
   end
 
   def gig_params
