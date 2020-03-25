@@ -28,8 +28,6 @@
       </div>
 
         <div class="navbar-end">
-             <a class="navbar-item">Postar Serviços</a>
-             <a class="navbar-item">Pesquisar Serviços</a>
 
              <div class="navbar-end">
              <%= link_to 'Postar Serviço', new_gig_path, class: "navbar-item" %>
@@ -63,7 +61,7 @@
         </div>
       </div>
     </nav>
-
+    <% if (user_signed_in?) && !current_page?(root_path) && !current_page?("/gigs/#{params[:id]}") && !current_page?("/users/#{params[:id]}") %>
       <nav class="navbar has-shadow" style="z-index: 5">
           <div class="container">
               <div class="navbar">
@@ -106,7 +104,7 @@
               </div>
           </div>
       </nav>
-
+    <% end %>
     <script>
      $(document).ready(function() {
 

@@ -10,6 +10,7 @@ require("channels")
 
 window.noty = require('noty');
 window.Dropzone = require("dropzone")
+window.BulmaCarousel = require("bulma-extensions/bulma-carousel/dist/js/bulma-carousel")
 
 $(document).ready(() => {
     $('.toggle').on('click', (e) => {
