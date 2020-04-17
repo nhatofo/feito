@@ -1,120 +1,117 @@
-<nav class="navbar is-black" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
+<nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
         <a class="navbar-item" href="/">
-        <%= image_tag "feito_3.09.png" %>
+            <h1 class="title is-4">Feito</h1>
         </a>
 
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
         </a>
-      </div>
+    </div>
 
-      <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start">
-                <div class="navbar-item">
-                    <div class="field has-addons">
-                        <div class="control">
-                        <input class="input" type="text" placeholder="Encontre o Serviço">
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <div class="navbar-item">
+                <div class="field has-addons">
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Find services">
                     </div>
                     <div class="control">
-                       <a class="button is-success is-rounded">Pesquisar </a>
+                        <a class="button is-danger">Perquisar</a>
                     </div>
                 </div>
-
-             </div>
-          </div>
-      </div>
+            </div>
+        </div>
 
         <div class="navbar-end">
+            <%= link_to 'Listar Serviço', new_gig_path, class: "navbar-item" %>
+            <a class="navbar-item">Pesquizar Serviços</a>
 
-             <div class="navbar-end">
-             <%= link_to 'Postar Serviço', new_gig_path, class: "navbar-item" %>
-             <a class="navbar-item">Pesquizar Serviços</a>
- 
-             <% if (!user_signed_in?) %>
-                 <div class="navbar-item">
-                     <div class="buttons">
-                         <%= link_to  "Cadastra-se", new_user_registration_path, class: "button is-primary" %>
-                         <%= link_to  "Entrar", new_user_session_path, class: "button is-light" %>
-                     </div>
-                 </div>
-             <% else %>
-                 <div class="navbar-item has-dropdown is-hoverable">
-                     <a class="navbar-link">
-                         <figure class="image is-24x24 m-r-5">
-                             <%= image_tag avatar_url(current_user), class: "is-rounded" %>
-                         </figure>
-                         <%= current_user.full_name %>
-                     </a>
-
-                        <div class="navbar-dropdown ">
-                            <%= link_to "Perfil", edit_user_registration_path, Class: "navbar-item" %> 
-                            <a href="" class="navbar-item ">Painel Principal</a>
-                            <hr class="navbar-divider ">
-                            <%= link_to "Sair", destroy_user_session_path,  method: :delete, Class: "navbar-item" %> 
-                    
-                        </div>
+            <% if (!user_signed_in?) %>
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <%= link_to  "Cadastrar-se", new_user_registration_path, class: "button is-primary" %>
+                        <%= link_to  "Entrar", new_user_session_path, class: "button is-light" %>
+                    </div>
                 </div>
-          <% end %>
+            <% else %>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        <figure class="image is-24x24 m-r-5">
+                            <%= image_tag avatar_url(current_user), class: "is-rounded" %>
+                        </figure>
+                        <%= current_user.full_name %>
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <%= link_to  "Perfil", edit_user_registration_path, class: "navbar-item" %>
+                        <%= link_to 'Painel Principal', dashboard_path, class: "navbar-item" %>
+                        <hr class="navbar-divider">
+                        <%= link_to  "Sair", destroy_user_session_path, method: :delete, class: "navbar-item" %>
+                    </div>
+                </div>
+            <% end %>
         </div>
-      </div>
+    </div>
+</nav>
+
+<% if (user_signed_in?) && !current_page?(root_path) && !current_page?("/gigs/#{params[:id]}") && !current_page?("/users/#{params[:id]}") %>
+    <nav class="navbar has-shadow" style="z-index: 5">
+        <div class="container">
+            <div class="navbar">
+                <%= link_to 'Painel Princinpal', dashboard_path, class: "navbar-item" %>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Vender Serviço</a>
+                    <div class="navbar-dropdown">
+                        <%= link_to 'Criar serviço', new_gig_path, class: "navbar-item" %>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Comprar Serviços</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">Requisitar serviço</a>
+                        <a class="navbar-item">Gerir pedidos</a>
+                    </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Requisições de Compra</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">Requisições Activas</a>
+                        <a class="navbar-item">Ofertas Enviadas</a>
+                    </div>
+                </div><div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Pedidos</a>
+                    <div class="navbar-dropdown">
+                        <%= link_to 'Pedidos de Venda', selling_orders_path, class: "navbar-item" %> 
+                        <%= link_to 'Pedidos de Compra', buying_orders_path, class: "navbar-item" %>
+                    </div>
+                </div>
+                <%= link_to 'Ganhos', dashboard_path, class: "navbar-item" %>
+                <%= link_to 'Mensagens', dashboard_path, class: "navbar-item" %>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Configurações</a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">Forma de Pagamento</a>
+                        <a class="navbar-item">Metodo  de Pagamento</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </nav>
-    <% if (user_signed_in?) && !current_page?(root_path) && !current_page?("/gigs/#{params[:id]}") && !current_page?("/users/#{params[:id]}") %>
-      <nav class="navbar has-shadow" style="z-index: 5">
-          <div class="container">
-              <div class="navbar">
-                  <%= link_to 'Painel Controle', dashboard_path, class: "navbar-item" %>
-                  <div class="navbar-item has-dropdown is-hoverable">
-                      <a class="navbar-link">Vender Serviços</a>
-                      <div class="navbar-dropdown">
-                          <%= link_to 'Listar novo serviço', class: "navbar-item" %>
-                      </div>
-                  </div>
-                  <div class="navbar-item has-dropdown is-hoverable">
-                      <a class="navbar-link">Comprar Serviços</a>
-                      <div class="navbar-dropdown">
-                          <a class="navbar-item">Requisitar Serviços</a>
-                          <a class="navbar-item">Gerir Requisições</a>
-                      </div>
-                  </div>
-                  <div class="navbar-item has-dropdown is-hoverable">
-                      <a class="navbar-link">Requisições de Compra</a>
-                      <div class="navbar-dropdown">
-                          <a class="navbar-item">Requisições Activas</a>
-                          <a class="navbar-item">Ofertas Enviadas</a>
-                      </div>
-                  </div><div class="navbar-item has-dropdown is-hoverable">
-                      <a class="navbar-link">Gerir Pedidos</a>
-                      <div class="navbar-dropdown">
-                          <%= link_to  'Pedidos de Venda', class: "navbar-item" %><br>
-                          <%= link_to 'Pedidos de Compra', class: "navbar-item" %>
-                      </div>
-                  </div>
-                  <%= link_to 'Ganhos', dashboard_path, class: "navbar-item" %>
-                  <%= link_to 'Mensagens', dashboard_path, class: "navbar-item" %>
-                  <div class="navbar-item has-dropdown is-hoverable">
-                      <a class="navbar-link">Configurações</a>
-                      <div class="navbar-dropdown">
-                          <a class="navbar-item">Forma de Pagamento</a>
-                          <a class="navbar-item">Metodo  de Pagamento</a>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </nav>
-    <% end %>
-    <script>
-     $(document).ready(function() {
+<% end %>
 
-          // Check for click events on the navbar burger icon
-        $(".navbar-burger").click(function() {
+<script>
+$(document).ready(function() {
 
-                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                $(".navbar-burger").toggleClass("is-active");
-                $(".navbar-menu").toggleClass("is-active");   
+  // Check for click events on the navbar burger icon
+  $(".navbar-burger").click(function() {
 
-            });
-        });
-    </script>
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      $(".navbar-burger").toggleClass("is-active");
+      $(".navbar-menu").toggleClass("is-active");
+
+  });
+});
+</script>
