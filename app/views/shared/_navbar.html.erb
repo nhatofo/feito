@@ -71,14 +71,14 @@
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">Comprar Serviços</a>
                     <div class="navbar-dropdown">
-                        <a class="navbar-item">Requisitar serviço</a>
-                        <a class="navbar-item">Gerir pedidos</a>
+                        <%= link_to 'Incluir pedido de serviços', new_request_path, class: "navbar-item" %>
+                        <%= link_to 'Gerir pedidos', requests_path, class: "navbar-item" %>
                     </div>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">Requisições de Compra</a>
                     <div class="navbar-dropdown">
-                        <a class="navbar-item">Requisições Activas</a>
+                        <%= link_to 'Pedidos ativos', all_requests_path, class: "navbar-item" %>
                         <a class="navbar-item">Ofertas Enviadas</a>
                     </div>
                 </div><div class="navbar-item has-dropdown is-hoverable">
