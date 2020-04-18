@@ -25,8 +25,8 @@ class OffersController < ApplicationController
     end
 
     def accept
-        if @offer.pending?
-            @offer.accepted!
+        if @offer.pendente?
+            @offer.aceite!
 
             if charge(@offer.request, @offer)
                 flash[:notice] = "Aceite..."
@@ -39,8 +39,8 @@ class OffersController < ApplicationController
     end
 
     def reject
-        if @offer.pending?
-            @offer.rejected!
+        if @offer.pendente?
+            @offer.rejeitado!
             flash[:notice] = "Rejeitado..."
         end
         redirect_to request.referrer
