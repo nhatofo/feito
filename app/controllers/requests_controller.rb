@@ -66,6 +66,9 @@ class RequestsController < ApplicationController
 
   def set_request
     @request = Request.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:notice] = "Registro nao encontrado"
+    redirect_to :action => 'index'
   end
 
   def is_authorised
