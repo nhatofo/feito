@@ -1,7 +1,7 @@
 <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
-            <h1 class="title is-4">Feito</h1>
+            <h1 class="title is-dark is-3">Feito</h1>
         </a>
 
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -16,7 +16,7 @@
             <div class="navbar-item">
                 <div class="field has-addons">
                     <div class="control">
-                        <input class="input" type="text" placeholder="Find services">
+                        <input class="input" type="text" placeholder="Pesquizar Serviços">
                     </div>
                     <div class="control">
                         <a class="button is-danger">Perquisar</a>
@@ -32,8 +32,8 @@
             <% if (!user_signed_in?) %>
                 <div class="navbar-item">
                     <div class="buttons">
-                        <%= link_to  "Cadastrar-se", new_user_registration_path, class: "button is-primary" %>
-                        <%= link_to  "Entrar", new_user_session_path, class: "button is-light" %>
+                        <%= link_to  "Cadastrar-se", new_user_registration_path, class: "button is-danger" %>
+                        <%= link_to  "Entrar", new_user_session_path, class: "button is-dark" %>
                     </div>
                 </div>
             <% else %>
@@ -57,7 +57,7 @@
     </div>
 </nav>
 
-<% if (user_signed_in?) && !current_page?(root_path) && !current_page?("/gigs/#{params[:id]}") && !current_page?("/users/#{params[:id]}") %>
+<% if (user_signed_in?) && !current_page?(root_path) && !current_page?(search_path) && !current_page?("/gigs/#{params[:id]}") && !current_page?("/users/#{params[:id]}") %>
     <nav class="navbar has-shadow" style="z-index: 5">
         <div class="container">
             <div class="navbar">
